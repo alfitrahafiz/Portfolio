@@ -1,4 +1,3 @@
-import Navbar from "../../components/Navbar";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 

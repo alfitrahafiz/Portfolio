@@ -13,6 +13,6 @@
 
 @layer components {
   .input {
-    @apply w-full bg-white resize-none rounded-base border-[1px] border-gray-300 p-2.5 font-base ring-offset-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-500  focus-visible:ring-offset-2 outline-none;
+    @apply w-full outline-none px-4 py-2 rounded-base shadow-dark border-2 border-border text-text focus:translate-x-boxShadowX focus:translate-y-boxShadowY focus:shadow-none transition-all;
   }
 }

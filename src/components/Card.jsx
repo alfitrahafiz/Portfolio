@@ -1,24 +1,31 @@
 import React from "react";
-import { FaReact, FaJs, FaHtml5, FaCss3 } from "react-icons/fa";
-import { SiTailwindcss, SiTypescript } from "react-icons/si";
+import { FaReact, FaHtml5, FaCss3Alt, FaJsSquare, FaVuejs, FaRust } from "react-icons/fa";
+import { SiRedux, SiStyledcomponents, SiTailwindcss, SiTypescript, SiWebassembly } from "react-icons/si";
+import GSAP from "../assets/images/GSAP.jpeg";
 import Button from "./Button";
 
-const iconMap = {
-  React: FaReact,
-  JavaScript: FaJs,
-  HTML: FaHtml5,
-  CSS: FaCss3,
-  Tailwind: SiTailwindcss,
-  TypeScript: SiTypescript,
-};
+const icon = [
+  { name: "HTML", icon: <FaHtml5 className="text-red-600 w-6 h-6" /> },
+  { name: "CSS", icon: <FaCss3Alt className="text-blue-600 w-6 h-6" /> },
+  { name: "JavaScript", icon: <FaJsSquare className="text-yellow-500 w-6 h-6" /> },
+  { name: "React", icon: <FaReact className="text-blue-400 w-6 h-6" /> },
+  { name: "Tailwind", icon: <SiTailwindcss className="text-teal-500 w-6 h-6" /> },
+  { name: "TypeScript", icon: <SiTypescript className="text-blue-500 w-6 h-6" /> },
+  { name: "Styled", icon: <SiStyledcomponents className="text-pink-500 w-6 h-6" /> },
+  { name: "Vue", icon: <FaVuejs className="text-green-600 w-6 h-6" /> },
+  { name: "GSAP", icon: <img src={GSAP} alt="GSAP" className="w-6 h-6" /> },
+  { name: "Redux", icon: <SiRedux className="text-purple-500 w-6 h-6" /> },
+  { name: "WebAssembly", icon: <SiWebassembly className="text-[#624de8] w-6 h-6" /> },
+  { name: "Rust", icon: <FaRust className="text-black w-6 h-6" /> },
+];
 
 const Card = ({ imageSrc, title, description, techStack, onViewClick }) => {
   return (
-    <div className="relative group w-80 p-6 bg-main border-2 border-black dark:bg-darkBg dark:border-darkBorder shadow-light dark:shadow-dark transform hover:translate-x-[5px] hover:translate-y-[5px] transition-transform duration-300 hover:bg-mainAccent">
+    <div className="relative group w-80 p-6 bg-main border-2 border-black dark:bg-main dark:border-darkBorder shadow-light dark:shadow-dark transform hover:translate-x-[5px] hover:translate-y-[5px] transition-transform duration-300 hover:bg-mainAccent">
       {/* Title & Description Section */}
-      <div className="bg-white dark:bg-darkBg border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark px-4 py-2 mb-4 relative z-10">
+      <div className="bg-white dark:bg-bg border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark px-4 py-2 mb-4 relative z-10">
         <h2 className="text-lg font-bold text-center mb-2">{title}</h2>
-        <p className="text-sm text-center text-text dark:text-darkText">{description}</p>
+        <p className="text-sm text-center text-text dark:text-text">{description}</p>
       </div>
 
       {/* Image Section */}
@@ -31,12 +38,13 @@ const Card = ({ imageSrc, title, description, techStack, onViewClick }) => {
       </div>
 
       {/* Tech Stack Section */}
-      <div className="grid grid-cols-3 gap-2 text-center mb-4">
+      <div className="grid grid-flow-col gap-2 bg-white dark:bg-bg border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark px-4 py-2 mb-4 relative z-10">
         {techStack.map((tech, index) => {
-          const IconComponent = iconMap[tech];
+          // console.log(tech);
+          const techItem = icon.find((item) => item.name === tech);
           return (
             <div key={index} className="flex flex-col items-center text-xs">
-              {IconComponent && <IconComponent className="w-6 h-6 mb-1 text-black dark:text-darkText" />}
+              {techItem && techItem.icon}
               <span>{tech}</span>
             </div>
           );

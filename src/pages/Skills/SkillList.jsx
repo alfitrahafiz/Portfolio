@@ -18,7 +18,7 @@ const SkillList = () => {
   return (
     <>
       <div className="container mx-auto py-10" id="skills">
-        <div className="grid grid-cols-1 sm:grid-cols-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10">
           <div className="place-self-center">
             <ImageCard imageUrl={image}>Hafiz</ImageCard>
           </div>
