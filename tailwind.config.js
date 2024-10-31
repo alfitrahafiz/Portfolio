@@ -1,44 +1,35 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        main: "#a388ee",
-        mainAccent: "#9e66ff", // not needed for shadcn components
-        overlay: "rgba(0,0,0,0.8)", // background color overlay for alert dialogs, modals, etc.
-
-        // light mode
-        bg: "#e3dff2",
-        text: "#000",
-        border: "#000",
-
-        // dark mode
-        darkBg: "#1D1F27",
-        darkText: "#eeefe9",
-        darkBorder: "#000",
-        secondaryBlack: "#1b1b1b", // opposite of plain white, not used pitch black because borders and box-shadows are that color
-      },
-      borderRadius: {
-        base: "5px",
-      },
-      boxShadow: {
-        light: "3px 3px 0px 0px #000",
-        dark: "3px 3px 0px 0px #000",
-      },
-      translate: {
-        boxShadowX: "3px",
-        boxShadowY: "3px",
-        reverseBoxShadowX: "-3px",
-        reverseBoxShadowY: "-3px",
-      },
-      fontWeight: {
-        base: "500",
-        heading: "700",
+        // Background colors
+        bg: {
+          primary: '#ffffff', // putih bersih untuk latar utama
+          secondary: '#f5f5f5', // abu-abu muda untuk kontras lembut
+          dark: '#1c1c1e', // hitam arang untuk area gelap
+        },
+        // Text colors
+        text: {
+          primary: '#1a1a1a', // abu-abu gelap untuk teks utama
+          secondary: '#3c3c3c', // abu-abu medium untuk teks sekunder
+          muted: '#7d7d7d', // abu-abu terang untuk teks yang diredam
+        },
+        // Navbar colors
+        navbar: {
+          bg: '#1a1a1a', // abu-abu sangat gelap untuk navbar
+          text: '#ffffff', // putih untuk teks pada navbar
+          accent: '#d4af37', // warna emas sebagai accent, menghindari warna biru
+        },
+        // Accent color (for buttons, icons, etc.)
+        accent: {
+          primary: '#d4af37', // emas untuk elemen aksen
+          secondary: '#aaaaaa', // abu-abu terang untuk aksen yang lebih halus
+        },
       },
       fontFamily: {
-        base: "Roboto Mono",
-        heading: "Roboto Mono",
+        sans: ['Poppins', 'sans-serif'],
       },
     },
   },

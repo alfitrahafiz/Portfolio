@@ -3,7 +3,7 @@ const Button = ({ onClick, children }) => {
     <div>
       <button
         onClick={onClick}
-        className="flex text-text cursor-pointer items-center rounded-base border-2 border-border dark:border-darkBorder bg-main px-4 py-2 text-sm font-base shadow-light dark:shadow-dark transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none dark:hover:shadow-none"
+        className='flex items-center bg-accent-primary hover:bg-accent-primary/90 text-slate-900 px-4 py-2 font-medium transform hover:scale-[1.02] duration-300 rounded shadow-md'
       >
         {children}
       </button>

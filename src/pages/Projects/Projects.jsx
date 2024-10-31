@@ -1,86 +1,126 @@
-import React, { useState } from "react";
-import Card from "../../components/Card";
-import modular from "../../assets/images/modular.jpg";
-import animated from "../../assets/images/animated.jpg";
-import grid from "../../assets/images/grid.webp";
-import diagram from "../../assets/images/diagram.png";
-import web from "../../assets/images/web.png";
-import Modal from "../../components/Modal"; // Import komponen Modal
+import React, { useState } from 'react';
+import Card from '../../components/Card';
+import Modal from '../../components/Modal';
+
+// Import images
+import modular from '../../assets/images/modular.jpg';
+import jikan from '../../assets/images/jikan.png';
+import eshop from '../../assets/images/eshop.png';
+import taskflow from '../../assets/images/taskflow.png';
+import web from '../../assets/images/animated.jpg';
 
 const Projects = () => {
   const [modalActive, setModalActive] = useState(false);
-  const [currentProject, setCurrentProject] = useState(null); // State untuk proyek yang sedang aktif
+  const [currentProject, setCurrentProject] = useState(null);
+  const [visibleProjects, setVisibleProjects] = useState(2);
 
   const handleViewClick = (project) => {
-    setCurrentProject(project); // Set proyek yang dipilih
-    setModalActive(true); // Aktifkan modal
+    setCurrentProject(project);
+    setModalActive(true);
   };
 
   const projects = [
     {
-      title: "ReactiveUI",
-      description: "A modern React component library with a focus on accessibility and performance optimization for large-scale applications.",
-      techStack: ["React", "TypeScript", "Styled"],
-      imageSrc: modular,
+      title: 'AnimeVault',
+      description:
+        'A dynamic anime discovery platform built with React and Jikan API. Features include real-time search, advanced filtering, seasonal anime tracking, and a responsive grid layout. Implemented with React Query for efficient data fetching and Framer Motion for smooth animations.',
+      imageSrc: jikan, // Anime related image
+      techStack: ['React', 'TypeScript', 'Tailwind CSS', 'React Query', 'Jikan API'],
+      githubUrl: 'https://github.com/yourusername/animevault',
     },
     {
-      title: "VueMotion",
-      description: "An animation library for Vue.js that simplifies the process of creating fluid, physics-based animations and transitions.",
-      techStack: ["Vue", "JavaScript", "GSAP"],
-      imageSrc: animated,
+      title: 'DashboardPro',
+      description:
+        'A modern admin dashboard template featuring dark/light mode, real-time charts, customizable widgets, and comprehensive analytics views. Built with Next.js 13 and showcases advanced state management patterns.',
+      imageSrc: modular, // Dashboard related image
+      techStack: ['Next.js', 'Redux Toolkit', 'Chart.js', 'Tailwind CSS', 'TypeScript'],
+      githubUrl: 'https://github.com/yourusername/dashboardpro',
     },
     {
-      title: "PixelPerfect",
-      description: "A responsive CSS framework that emphasizes pixel-perfect designs across devices, with a built-in design system.",
-      techStack: ["Tailwind", "HTML", "JavaScript"],
-      imageSrc: grid,
+      title: 'E-Shop',
+      description:
+        'A full-featured e-commerce platform with product filtering, cart management, user authentication, and payment integration. Implements modern UI patterns and optimized for performance with Next.js.',
+      imageSrc: eshop, // E-commerce related image
+      techStack: ['Next.js', 'React', 'Redux', 'Tailwind CSS', 'Stripe', 'MongoDB'],
+      githubUrl: 'https://github.com/yourusername/eshop',
     },
     {
-      title: "StateForge",
-      description: "A lightweight state management solution for JavaScript applications, with built-in support for time-travel debugging.",
-      techStack: ["JavaScript", "TypeScript", "Redux"],
-      imageSrc: diagram,
+      title: 'TaskFlow',
+      description:
+        'A beautiful and intuitive task management application with drag-and-drop functionality, real-time updates, and team collaboration features. Showcases advanced React patterns and smooth animations.',
+      imageSrc: taskflow, // Task management related image
+      techStack: ['React', 'TypeScript', 'React DnD', 'Firebase', 'Styled Components'],
+      githubUrl: 'https://github.com/yourusername/taskflow',
     },
     {
-      title: "WebAssemblyStudio",
-      description: "An online IDE for developing and testing WebAssembly modules, integrated with popular frontend frameworks.",
-      techStack: ["WebAssembly", "JavaScript", "Rust"],
-      imageSrc: web,
+      title: 'PortfolioX',
+      description:
+        'A modern portfolio template with smooth scrolling, interactive elements, and dynamic theming. Features a unique layout with CSS Grid and engaging animations. Optimized for performance and SEO.',
+      imageSrc: web, // Portfolio related image
+      techStack: ['React', 'Framer Motion', 'Tailwind CSS', 'React Three Fiber'],
+      githubUrl: 'https://github.com/yourusername/portfoliox',
     },
   ];
 
+  const handleLoadMore = () => {
+    setVisibleProjects(projects.length);
+  };
+  const Hide = () => {
+    setVisibleProjects(2);
+  };
+
   return (
     <>
-      <div className="container mx-auto py-10" id="projects">
-        <h1 className="text-3xl font-semibold text-center mb-8">My Projects</h1>
+      <div className='container mx-auto py-16' id='projects'>
+        <h1 className='text-3xl font-semibold text-center mb-8'>My Projects</h1>
 
         {/* List Card project */}
-        <div className="flex justify-center items-center gap-10 flex-wrap">
-          {projects.map((project, index) => (
+        <div className='flex justify-center items-center gap-10 flex-wrap'>
+          {projects.slice(0, visibleProjects).map((project, index) => (
             <Card
               key={index}
               imageSrc={project.imageSrc}
               title={project.title}
               description={project.description}
               techStack={project.techStack}
-              onViewClick={() => handleViewClick(project)} // Kirim proyek ke fungsi
+              githubUrl={project.githubUrl}
+              onViewClick={() => handleViewClick(project)}
             />
           ))}
         </div>
+
+        {/* Load More Button */}
+        {visibleProjects < projects.length ? (
+          <div className='mt-10 flex justify-center'>
+            <button
+              onClick={handleLoadMore}
+              className='px-6 py-3 bg-bg-dark text-white rounded-lg font-medium transition-all duration-300hover:bg-blue-700 hover:shadow-lg active:scale-95'
+            >
+              Load More Projects
+            </button>
+          </div>
+        ) : (
+          <div className='mt-10 flex justify-center'>
+            <button
+              onClick={Hide}
+              className='px-6 py-3 bg-bg-dark text-white rounded-lg font-medium transition-all duration-300hover:bg-blue-700 hover:shadow-lg active:scale-95'
+            >
+              Hide Projects
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Modal Component */}
       {currentProject && (
         <Modal active={modalActive} setActive={setModalActive}>
-          {/* <h2 className="text-lg font-bold">{currentProject.title}</h2>
-          <p className="text-sm">{currentProject.description}</p>
-          <img src={currentProject.imageSrc} alt={currentProject.title} className="w-full" />
-          <p>Tech Stack: {currentProject.techStack.join(", ")}</p> */}
-          <p className="m-3 text-lg text-center font-base ">Sorry, this feature is not available yet 😭😭</p>
+          <p className='m-3 text-lg text-center font-base'>
+            Sorry, this feature is not available yet 😭😭
+          </p>
         </Modal>
       )}
 
-      <hr className="border-dashed border-border dark:border-darkBorder mx-10" />
+      <hr className='border-dashed border-border dark:border-darkBorder mx-10' />
     </>
   );
 };

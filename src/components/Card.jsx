@@ -1,54 +1,50 @@
-import React from "react";
-import { FaReact, FaHtml5, FaCss3Alt, FaJsSquare, FaVuejs, FaRust } from "react-icons/fa";
-import { SiRedux, SiStyledcomponents, SiTailwindcss, SiTypescript, SiWebassembly } from "react-icons/si";
-import GSAP from "../assets/images/GSAP.jpeg";
-import Button from "./Button";
+import React from 'react';
+import { FiEye } from 'react-icons/fi';
+import Button from './Button';
 
-const icon = [
-  { name: "HTML", icon: <FaHtml5 className="text-red-600 w-6 h-6" /> },
-  { name: "CSS", icon: <FaCss3Alt className="text-blue-600 w-6 h-6" /> },
-  { name: "JavaScript", icon: <FaJsSquare className="text-yellow-500 w-6 h-6" /> },
-  { name: "React", icon: <FaReact className="text-blue-400 w-6 h-6" /> },
-  { name: "Tailwind", icon: <SiTailwindcss className="text-teal-500 w-6 h-6" /> },
-  { name: "TypeScript", icon: <SiTypescript className="text-blue-500 w-6 h-6" /> },
-  { name: "Styled", icon: <SiStyledcomponents className="text-pink-500 w-6 h-6" /> },
-  { name: "Vue", icon: <FaVuejs className="text-green-600 w-6 h-6" /> },
-  { name: "GSAP", icon: <img src={GSAP} alt="GSAP" className="w-6 h-6" /> },
-  { name: "Redux", icon: <SiRedux className="text-purple-500 w-6 h-6" /> },
-  { name: "WebAssembly", icon: <SiWebassembly className="text-[#624de8] w-6 h-6" /> },
-  { name: "Rust", icon: <FaRust className="text-black w-6 h-6" /> },
-];
-
-const Card = ({ imageSrc, title, description, techStack, onViewClick }) => {
+const Card = ({ imageSrc, title, description, onViewClick, techStack = [], githubUrl }) => {
   return (
-    <div className="relative group w-80 p-6 bg-main border-2 border-black dark:bg-main dark:border-darkBorder shadow-light dark:shadow-dark transform hover:translate-x-[5px] hover:translate-y-[5px] transition-transform duration-300 hover:bg-mainAccent">
-      {/* Title & Description Section */}
-      <div className="bg-white dark:bg-bg border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark px-4 py-2 mb-4 relative z-10">
-        <h2 className="text-lg font-bold text-center mb-2">{title}</h2>
-        <p className="text-sm text-center text-text dark:text-text">{description}</p>
+    <div className='relative group w-full max-w-sm rounded-xl overflow-hidden bg-white border border-black transition-all duration-300 hover:-translate-y-1'>
+      {/* Image Container */}
+      <div className='relative h-48 w-full overflow-hidden'>
+        <img
+          src={imageSrc || '/api/placeholder/400/320'}
+          alt={title}
+          className='h-full w-full object-cover transition-all duration-500 group-hover:scale-110'
+        />
+        {/* Overlay on hover */}
+        <div className='absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
       </div>
 
-      {/* Image Section */}
-      <div className="relative overflow-hidden border-2 border-black dark:border-darkBorder shadow-light dark:shadow-dark mb-4">
-        <img src={imageSrc} alt={title} className="w-full h-40 object-cover" />
-        <div className="absolute inset-0 flex items-center justify-center bg-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button onClick={onViewClick}>Read More</Button>
-          {/* <button className="bg-main text-white dark:bg-darkText px-4 py-2 font-bold transform hover:scale-105 transition-transform">View Project</button> */}
+      {/* Content Container */}
+      <div className='p-5'>
+        {/* Title */}
+        <h3 className='text-xl font-bold text-gray-800 mb-3'>{title}</h3>
+
+        {/* Description */}
+        <p className='text-gray-600 text-sm mb-4 line-clamp-3'>{description}</p>
+
+        {/* Tech Stack */}
+        {techStack && techStack.length > 0 && (
+          <div className='flex flex-wrap gap-2 mb-4'>
+            {techStack.map((tech, index) => (
+              <span
+                key={index}
+                className='px-2 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded-full'
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className='flex items-center justify-end'>
+          {/* View Button */}
+          <Button onClick={onViewClick}>
+            <FiEye className='w-4 h-4 mr-2' />
+            <span>View Project</span>
+          </Button>
         </div>
-      </div>
-
-      {/* Tech Stack Section */}
-      <div className="grid grid-flow-col gap-2 bg-white dark:bg-bg border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark px-4 py-2 mb-4 relative z-10">
-        {techStack.map((tech, index) => {
-          // console.log(tech);
-          const techItem = icon.find((item) => item.name === tech);
-          return (
-            <div key={index} className="flex flex-col items-center text-xs">
-              {techItem && techItem.icon}
-              <span>{tech}</span>
-            </div>
-          );
-        })}
       </div>
     </div>
   );
