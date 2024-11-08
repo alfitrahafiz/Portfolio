@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from '../../components/Card';
 import Modal from '../../components/Modal';
 
@@ -26,7 +26,7 @@ const Projects = () => {
         'A dynamic anime discovery platform built with React and Jikan API. Features include real-time search, advanced filtering, seasonal anime tracking, and a responsive grid layout. Implemented with React Query for efficient data fetching and Framer Motion for smooth animations.',
       imageSrc: jikan, // Anime related image
       techStack: ['React', 'TypeScript', 'Tailwind CSS', 'React Query', 'Jikan API'],
-      githubUrl: 'https://github.com/yourusername/animevault',
+      githubUrl: 'https://github.com/alfitrahafiz/AnimeVault',
     },
     {
       title: 'DashboardPro',
