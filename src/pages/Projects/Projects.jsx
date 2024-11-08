@@ -14,10 +14,10 @@ const Projects = () => {
   const [currentProject, setCurrentProject] = useState(null);
   const [visibleProjects, setVisibleProjects] = useState(2);
 
-  const handleViewClick = (project) => {
-    setCurrentProject(project);
-    setModalActive(true);
-  };
+  const handleViewClick = (project) =>
+    project.githubUrl
+      ? window.open(project.githubUrl, '_blank')
+      : (setCurrentProject(project), setModalActive(true));
 
   const projects = [
     {
@@ -34,7 +34,7 @@ const Projects = () => {
         'A modern admin dashboard template featuring dark/light mode, real-time charts, customizable widgets, and comprehensive analytics views. Built with Next.js 13 and showcases advanced state management patterns.',
       imageSrc: modular, // Dashboard related image
       techStack: ['Next.js', 'Redux Toolkit', 'Chart.js', 'Tailwind CSS', 'TypeScript'],
-      githubUrl: 'https://github.com/yourusername/dashboardpro',
+      githubUrl: '',
     },
     {
       title: 'E-Shop',
@@ -42,7 +42,7 @@ const Projects = () => {
         'A full-featured e-commerce platform with product filtering, cart management, user authentication, and payment integration. Implements modern UI patterns and optimized for performance with Next.js.',
       imageSrc: eshop, // E-commerce related image
       techStack: ['Next.js', 'React', 'Redux', 'Tailwind CSS', 'Stripe', 'MongoDB'],
-      githubUrl: 'https://github.com/yourusername/eshop',
+      githubUrl: '',
     },
     {
       title: 'TaskFlow',
@@ -50,7 +50,7 @@ const Projects = () => {
         'A beautiful and intuitive task management application with drag-and-drop functionality, real-time updates, and team collaboration features. Showcases advanced React patterns and smooth animations.',
       imageSrc: taskflow, // Task management related image
       techStack: ['React', 'TypeScript', 'React DnD', 'Firebase', 'Styled Components'],
-      githubUrl: 'https://github.com/yourusername/taskflow',
+      githubUrl: '',
     },
     {
       title: 'PortfolioX',
@@ -58,7 +58,7 @@ const Projects = () => {
         'A modern portfolio template with smooth scrolling, interactive elements, and dynamic theming. Features a unique layout with CSS Grid and engaging animations. Optimized for performance and SEO.',
       imageSrc: web, // Portfolio related image
       techStack: ['React', 'Framer Motion', 'Tailwind CSS', 'React Three Fiber'],
-      githubUrl: 'https://github.com/yourusername/portfoliox',
+      githubUrl: '',
     },
   ];
 
@@ -114,6 +114,13 @@ const Projects = () => {
       {/* Modal Component */}
       {currentProject && (
         <Modal active={modalActive} setActive={setModalActive}>
+          <img
+            src={currentProject.imageSrc}
+            alt={currentProject.title}
+            className='w-full rounded-lg'
+          />
+
+          <h2 className='text-2xl font-bold m-3 text-center'>{currentProject.title}</h2>
           <p className='m-3 text-lg text-center font-base'>
             Sorry, this feature is not available yet 😭😭
           </p>
